@@ -1,4 +1,6 @@
 # crabi
+Una vez clonado el repositorio: Ejecutar el comando "go mod download" para descargar todas las dependencias necesarias
+
 1- Para levantar el API: Ejecutar el comando "go run main.go" desde la raiz del proyecto
 
 2- Para levantar la base de datos: Desde la carpeta database ejecutar el comando "docker build . -t crabi-test" e inmediatamente después "docker run -p 54321:5432 crabi-test"

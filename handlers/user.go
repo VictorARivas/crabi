@@ -75,8 +75,18 @@ func SignUpHandler(s server.Server) http.HandlerFunc {
 			http.Error(w, "last_name cannot be empty", http.StatusBadRequest)
 		}
 		params := url.Values{}
-		params.Add("first_name", name)
-		params.Add("last_name", lastname)
+		/*
+			Puede parecer raro que no esté mandando el mismo nombre y apellido a check-blacklist
+			pero, hay un caso y es que evalua la condición por cualquiera de las tres propiedades
+			es decir, si yo mandase:
+			{"first_name":"Victor",
+			 "last_name": "Guzman",
+			 "email": "victorarm24@gmail.com"}
+			La respuesta del API sería true, por lo tanto decidí evaluar solamente el email,
+			ya que no hay un identificador más claro.
+		*/
+		params.Add("first_name", "first_name")
+		params.Add("last_name", "last_name")
 		params.Add("email", request.Email)
 		resp, err := http.PostForm("http://localhost:3000/check-blacklist",
 			params)
